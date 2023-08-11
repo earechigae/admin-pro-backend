@@ -25,14 +25,14 @@ router.post('/', [
     crearMedico );
 
 router.put('/:id', [
-        /*validarJWT,*/
-
+        validarJWT,
+        validarCampos
     ], 
     actualizarMedico);
 
 
 router.delete('/:id', [
-    /*validarJWT*/
+    validarJWT
     ], borrarMedico);
 
 
