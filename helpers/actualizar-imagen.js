@@ -9,20 +9,34 @@ const actualizarImagen = async(tabla, id, nombreArchivo) => {
 
     switch(tabla){
        case 'hospitales':
-            console.log(`Hopsital Id: ${id}`);
-            const hospital = await Hospital.findById(id);
-            
-            if (!hospital){
-                console.log('No se encontró al hospital por Id')
-                return false;
+            let hospital;
+
+            switch(tabla){
+                case 'hospitales':
+                    hospital = await Hospital.findById(id);
+                    
+                    if (!hospital){
+                        console.log('No se encontró al hospital por Id')
+                        return false;
+                    }
+
+                    pathViejo = `./archivos-subidos/hospitales/${hospital.img}`;
+                    //borramos la imagen anterior 
+                    borrarImagen(pathViejo);
+
+                    hospital.img = nombreArchivo;
+                    await hospital.save();       
+                    //console.log(id + ' Imagen actualizada en ' + nombreArchivo) 
+                    break;
+                case 'medicos':
+                    // Rest of the code...
+                    break;
+                case 'usuarios':
+                    // Rest of the code...
+                    break;
             }
 
-            pathViejo = `./archivos-subidos/hospitales/${hospital.img}`;
-            //borramos la imagen anterior 
-            borrarImagen(pathViejo);
-
-            hospital.img = nombreArchivo;
-            await hospital.save();        
+            // Rest of the code...
             break;
 
         case 'medicos':

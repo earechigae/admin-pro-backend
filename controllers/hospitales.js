@@ -41,7 +41,7 @@ const actualizarHospital = async(req, res = response) => {
     const uid = req.uid;
 
     try{
-        const hospital = await Hospital.find({id});
+        const hospital = await Hospital.findById(id);
 
         if(!hospital || Object.keys(hospital).length === 0){
             return res.status(404).json({
@@ -74,7 +74,7 @@ const borrarHospital = async(req, res = response) => {
     const id = req.params.id;
 
     try{
-        const hospital = await Hospital.find({id});
+        const hospital = await Hospital.findById(id);
 
         if(!hospital || Object.keys(hospital).length === 0){
             return res.status(404).json({
