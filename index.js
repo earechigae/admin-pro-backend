@@ -2,6 +2,7 @@
 require('dotenv').config();
 const cors = require('cors');
 const express = require('express');
+const path = require('path');
 //const csrf = require('csrf');
 const { dbConnection } = require('./database/config')
 
@@ -29,6 +30,11 @@ app.use('/api/medicos', require('./routes/medicos'));
 app.use('/api/login', require('./routes/auth'));
 app.use('/api/todo', require('./routes/busquedas'));
 app.use('/api/subir-archivos',  require('./routes/subir-archivos'));
+ 
+// Lo último. Con este cambio Angular toma elcontrol del path en lo que haya en la carpeta public 
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
+}); 
 
 app.listen(process.env.PORT, () => {
     console.log('Servidor corriendo en puerto ' + process.env.PORT);
